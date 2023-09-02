@@ -6,11 +6,19 @@ const LoginPage = () => {
     const username = useRef()
     const password = useRef()
 
-    const onsubmitDetails = event => {
+    const onsubmitDetails = async event => {
         event.preventDefault()
-        console.log(username.current.value)
-        console.log(password.current.value)
-    }
+        const userName = username.current.value
+        const passWord = password.current.value
+        const userDetails = {userName, passWord}
+        const url = 'http://localhost:3005/NewAccount'
+        const options = {
+          method: 'POST',
+          body: JSON.stringify(userDetails),
+        }
+        const response = await fetch(url, options)
+        console.log(response.ok)
+        }
 
     return(
         <LoginContainer>
